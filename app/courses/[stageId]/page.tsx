@@ -4,6 +4,7 @@ import { ArrowLeft, CheckCircle2, Clock, PlayCircle } from "lucide-react";
 import { Header } from "@/components/Header";
 import { getStage, stages } from "@/lib/courses";
 import { CourseProgressBadge } from "@/components/CourseProgressBadge";
+import { RubyText } from "@/components/RubyText";
 import { StageProgressBar } from "@/components/StageProgressBar";
 import { getStageIcon } from "@/lib/stage-icons";
 
@@ -21,7 +22,7 @@ export default function StagePage({ params }: { params: { stageId: string } }) {
       <Header />
       <section className="mx-auto max-w-6xl px-5 pt-4">
         <Link href="/" className="inline-flex items-center gap-2 text-sm text-slate-300 hover:text-white">
-          <ArrowLeft size={16} /> 返回学习地图
+          <ArrowLeft size={16} /> <RubyText>返回学习地图</RubyText>
         </Link>
         <div className="glass mt-6 overflow-hidden rounded-[2rem] p-7">
           <div className={`h-1.5 rounded-full bg-gradient-to-r ${stage.color}`} />
@@ -32,13 +33,13 @@ export default function StagePage({ params }: { params: { stageId: string } }) {
               </div>
               <p className="text-sm font-bold uppercase tracking-[0.35em] text-slate-400">Stage {stage.order}</p>
               <h1 className="mt-2 text-4xl font-black tracking-tight sm:text-5xl">
-                {stage.emoji} {stage.title}
+                 {stage.emoji} <RubyText>{stage.title}</RubyText>
               </h1>
-              <p className="mt-4 max-w-2xl text-slate-300">{stage.description}</p>
+              <p className="mt-4 max-w-2xl text-slate-300"><RubyText>{stage.description}</RubyText></p>
             </div>
             <div className="w-full rounded-3xl bg-white/5 p-5 md:max-w-xs">
               <p className="mb-3 flex items-center justify-between text-sm text-slate-300">
-                <span>阶段进度</span>
+                <span><RubyText>阶段进度</RubyText></span>
                 <CourseProgressBadge stage={stage} mode="percent" />
               </p>
               <StageProgressBar stageId={stage.id} total={stage.courses.length} color={stage.color} />
@@ -53,21 +54,21 @@ export default function StagePage({ params }: { params: { stageId: string } }) {
               className="glass group rounded-[1.75rem] p-6 transition hover:-translate-y-1 hover:border-white/25"
             >
               <div className="flex items-start justify-between gap-4">
-                <span className="rounded-2xl bg-white/10 px-4 py-2 text-sm font-bold text-white">第 {index + 1} 课</span>
+                <span className="rounded-2xl bg-white/10 px-4 py-2 text-sm font-bold text-white"><RubyText>第</RubyText> {index + 1} <RubyText>课</RubyText></span>
                 <CourseProgressBadge stage={stage} courseId={course.id} />
               </div>
-              <h2 className="mt-6 text-2xl font-black">{course.title}</h2>
-              <p className="mt-3 text-sm leading-6 text-slate-300">{course.description}</p>
+              <h2 className="mt-6 text-2xl font-black"><RubyText>{course.title}</RubyText></h2>
+              <p className="mt-3 text-sm leading-6 text-slate-300"><RubyText>{course.description}</RubyText></p>
               <div className="mt-5 flex flex-wrap gap-3 text-sm text-slate-300">
                 <span className="inline-flex items-center gap-2 rounded-full bg-white/5 px-3 py-2">
-                  <Clock size={15} /> {course.duration}
+                  <Clock size={15} /> <RubyText>{course.duration}</RubyText>
                 </span>
                 <span className="inline-flex items-center gap-2 rounded-full bg-white/5 px-3 py-2">
-                  <CheckCircle2 size={15} /> {course.goals.length} 个目标
+                  <CheckCircle2 size={15} /> {course.goals.length} <RubyText>个目标</RubyText>
                 </span>
               </div>
               <div className="mt-6 inline-flex items-center gap-2 font-bold" style={{ color: stage.accent }}>
-                <PlayCircle size={18} /> 进入课程
+                <PlayCircle size={18} /> <RubyText>进入课程</RubyText>
               </div>
             </Link>
           ))}

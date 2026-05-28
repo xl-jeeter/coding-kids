@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { RubyText } from "@/components/RubyText";
 
 const canvasWidth = 320;
 const canvasHeight = 270;
@@ -118,11 +119,11 @@ export function CanvasGame({ onSuccess }: { onSuccess: () => void }) {
     <div className="space-y-4">
       <canvas ref={canvasRef} width={canvasWidth} height={canvasHeight} tabIndex={0} className="w-full rounded-3xl border border-white/10 outline-none focus:ring-2 focus:ring-emerald-300" aria-label="接水果 Canvas 游戏，使用左右方向键移动篮子" />
       <div className="flex flex-wrap gap-3">
-        <button onClick={() => moveBasket(-1)} className="rounded-2xl bg-white/10 px-5 py-3 font-bold">左移</button>
-        <button onClick={() => moveBasket(1)} className="rounded-2xl bg-white/10 px-5 py-3 font-bold">右移</button>
-        <button onClick={() => setRunning((value) => !value)} className="rounded-2xl bg-white px-5 py-3 font-bold text-slate-950">{running ? "暂停" : "开始游戏"}</button>
+        <button onClick={() => moveBasket(-1)} className="rounded-2xl bg-white/10 px-5 py-3 font-bold"><RubyText>左移</RubyText></button>
+        <button onClick={() => moveBasket(1)} className="rounded-2xl bg-white/10 px-5 py-3 font-bold"><RubyText>右移</RubyText></button>
+        <button onClick={() => setRunning((value) => !value)} className="rounded-2xl bg-white px-5 py-3 font-bold text-slate-950"><RubyText>{running ? "暂停" : "开始游戏"}</RubyText></button>
       </div>
-      <p className="text-slate-300">分数变量 score = {score}，接到 3 个水果完成挑战。可用方向键或 A/D 控制篮子。</p>
+      <p className="text-slate-300"><RubyText>分数变量</RubyText> score = {score}<RubyText>，接到</RubyText> 3 <RubyText>个水果完成挑战。可用方向键或</RubyText> A/D <RubyText>控制篮子。</RubyText></p>
     </div>
   );
 }

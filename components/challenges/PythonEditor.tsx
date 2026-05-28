@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { RubyText } from "@/components/RubyText";
 
 export function PythonEditor({ onSuccess }: { onSuccess: () => void }) {
   const [code, setCode] = useState('name = "小星"\nscore = 10\nprint("你好", name)\nprint("分数", score)');
@@ -35,10 +36,10 @@ export function PythonEditor({ onSuccess }: { onSuccess: () => void }) {
     <div className="grid gap-5 md:grid-cols-2">
       <textarea value={code} onChange={(e) => setCode(e.target.value)} className="min-h-64 rounded-3xl bg-slate-950 p-5 font-mono text-sm text-emerald-100 outline-none ring-1 ring-white/10 focus:ring-amber-300" />
       <div className="rounded-3xl bg-slate-950 p-5">
-        <p className="mb-3 font-bold text-slate-300">运行结果</p>
-        <pre className="whitespace-pre-wrap text-emerald-200">{output}</pre>
+        <p className="mb-3 font-bold text-slate-300"><RubyText>运行结果</RubyText></p>
+        <pre className="whitespace-pre-wrap text-emerald-200"><RubyText>{output}</RubyText></pre>
       </div>
-      <button onClick={run} className="rounded-2xl bg-white px-5 py-3 font-bold text-slate-950 md:w-fit">运行代码</button>
+      <button onClick={run} className="rounded-2xl bg-white px-5 py-3 font-bold text-slate-950 md:w-fit"><RubyText>运行代码</RubyText></button>
     </div>
   );
 }

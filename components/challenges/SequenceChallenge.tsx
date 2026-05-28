@@ -2,6 +2,7 @@
 
 import { useState, type DragEvent } from "react";
 import { ArrowDown, ArrowRight, RotateCcw } from "lucide-react";
+import { RubyText } from "@/components/RubyText";
 
 const initial = ["向右", "向下", "向右"];
 const target = ["向右", "向右", "向下"];
@@ -80,15 +81,15 @@ export function SequenceChallenge({ onSuccess }: { onSuccess: () => void }) {
             className="flex cursor-grab items-center gap-2 rounded-2xl bg-cyan-300 px-4 py-3 font-black text-slate-950 shadow-lg active:cursor-grabbing"
             aria-label={`${step}，拖拽或使用方向键调整顺序`}
           >
-            {step === "向右" ? <ArrowRight size={18} /> : <ArrowDown size={18} />} {step}
+            {step === "向右" ? <ArrowRight size={18} /> : <ArrowDown size={18} />} <RubyText>{step}</RubyText>
           </button>
         ))}
       </div>
       <div className="flex flex-wrap gap-3">
-        <button onClick={run} className="rounded-2xl bg-white px-5 py-3 font-bold text-slate-950">运行程序</button>
-        <button onClick={() => { setSteps(initial); setRobotPosition(0); setMessage("拖拽卡片调整顺序，让机器人走到星星。"); }} className="inline-flex items-center gap-2 rounded-2xl bg-white/10 px-5 py-3 font-bold text-white"><RotateCcw size={17} />重置</button>
+        <button onClick={run} className="rounded-2xl bg-white px-5 py-3 font-bold text-slate-950"><RubyText>运行程序</RubyText></button>
+        <button onClick={() => { setSteps(initial); setRobotPosition(0); setMessage("拖拽卡片调整顺序，让机器人走到星星。"); }} className="inline-flex items-center gap-2 rounded-2xl bg-white/10 px-5 py-3 font-bold text-white"><RotateCcw size={17} /><RubyText>重置</RubyText></button>
       </div>
-      <p className="text-slate-300">{message}</p>
+      <p className="text-slate-300"><RubyText>{message}</RubyText></p>
     </div>
   );
 }

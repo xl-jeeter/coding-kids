@@ -40,3 +40,16 @@ a {
 .scrollbar-none {
   scrollbar-width: none;
 }
+
+.ruby-text ruby {
+  ruby-position: over;
+  ruby-align: center;
+}
+
+.ruby-text rt {
+  color: rgba(203, 213, 225, 0.72);
+  font-size: 0.56em;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  line-height: 1;
+}

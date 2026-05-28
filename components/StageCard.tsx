@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { ArrowRight, BookOpen } from "lucide-react";
+import { RubyText } from "@/components/RubyText";
 import { useProgressStore } from "@/store/progress-store";
 import { ProgressBar } from "@/components/ProgressBar";
 import type { Stage } from "@/lib/courses";
@@ -25,20 +26,20 @@ export function StageCard({ stage }: { stage: Stage }) {
         <div className={`grid h-14 w-14 shrink-0 place-items-center rounded-3xl bg-gradient-to-br ${stage.color} text-slate-950 shadow-xl`}>
           <Icon size={28} />
         </div>
-        <span className="rounded-full bg-white/10 px-3 py-1 text-sm text-slate-300">阶段 {stage.order}</span>
+        <span className="rounded-full bg-white/10 px-3 py-1 text-sm text-slate-300"><RubyText>阶段</RubyText> {stage.order}</span>
       </div>
       <div className="relative mt-6">
         <p className="text-3xl">{stage.emoji}</p>
-        <h2 className="mt-2 text-2xl font-black tracking-tight">{stage.title}</h2>
+        <h2 className="mt-2 text-2xl font-black tracking-tight"><RubyText>{stage.title}</RubyText></h2>
         <p className="mt-1 text-sm font-semibold" style={{ color: stage.accent }}>
-          {stage.subtitle}
+          <RubyText>{stage.subtitle}</RubyText>
         </p>
-        <p className="mt-4 min-h-12 text-sm leading-6 text-slate-300">{stage.description}</p>
+        <p className="mt-4 min-h-12 text-sm leading-6 text-slate-300"><RubyText>{stage.description}</RubyText></p>
       </div>
       <div className="relative mt-6 space-y-3">
         <div className="flex items-center justify-between text-sm text-slate-300">
           <span className="flex items-center gap-2">
-            <BookOpen size={16} /> {stage.courses.length} 门课程
+            <BookOpen size={16} /> {stage.courses.length} <RubyText>门课程</RubyText>
           </span>
           <span>{progress}%</span>
         </div>
@@ -48,7 +49,7 @@ export function StageCard({ stage }: { stage: Stage }) {
         href={`/courses/${stage.id}`}
         className="relative mt-6 flex items-center justify-between rounded-2xl bg-white px-5 py-3 font-bold text-slate-950 transition group-hover:translate-y-[-2px]"
       >
-        开始学习
+        <RubyText>开始学习</RubyText>
         <ArrowRight size={18} />
       </Link>
     </motion.article>

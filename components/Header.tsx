@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { Sparkles } from "lucide-react";
+import { RubyText } from "@/components/RubyText";
 
 export function Header() {
   return (
@@ -10,14 +11,14 @@ export function Header() {
         </span>
         <span>
           <span className="block text-lg font-black tracking-tight">CodeSpark Kids</span>
-          <span className="block text-xs text-slate-400">儿童编程启蒙实验室</span>
+          <span className="block text-xs text-slate-400"><RubyText>儿童编程启蒙实验室</RubyText></span>
         </span>
       </Link>
       <Link
         href="/"
         className="rounded-full border border-white/10 px-4 py-2 text-sm text-slate-200 transition hover:border-cyan-300/50 hover:bg-white/10"
       >
-        学习地图
+        <RubyText>学习地图</RubyText>
       </Link>
     </header>
   );

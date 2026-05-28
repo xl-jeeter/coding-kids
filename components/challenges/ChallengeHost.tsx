@@ -1,6 +1,7 @@
 "use client";
 
 import { CheckCircle2 } from "lucide-react";
+import { RubyText } from "@/components/RubyText";
 import { useProgressStore } from "@/store/progress-store";
 import type { Course, Stage } from "@/lib/courses";
 import { BlocksChallenge } from "./BlocksChallenge";
@@ -31,9 +32,9 @@ export function ChallengeHost({ stage, course }: { stage: Stage; course: Course 
       <div className="mb-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
         <div>
           <p className="text-sm font-bold uppercase tracking-[0.25em] text-slate-400">Interactive Challenge</p>
-          <h2 className="mt-2 text-2xl font-black">互动挑战</h2>
+          <h2 className="mt-2 text-2xl font-black"><RubyText>互动挑战</RubyText></h2>
         </div>
-        {isCompleted && <span className="inline-flex items-center gap-2 rounded-full bg-emerald-400/15 px-4 py-2 text-sm font-bold text-emerald-200"><CheckCircle2 size={17} /> 已完成</span>}
+        {isCompleted && <span className="inline-flex items-center gap-2 rounded-full bg-emerald-400/15 px-4 py-2 text-sm font-bold text-emerald-200"><CheckCircle2 size={17} /> <RubyText>已完成</RubyText></span>}
       </div>
       {challenge}
     </div>

@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, type DragEvent } from "react";
+import { RubyText } from "@/components/RubyText";
 
 const blocks = ["当绿旗被点击", "移动 10 步", "转向右边", "说 你好"];
 
@@ -48,7 +49,7 @@ export function BlocksChallenge({ onSuccess }: { onSuccess: () => void }) {
   return (
     <div className="grid gap-5 md:grid-cols-[1fr_1.1fr]">
       <div className="space-y-3">
-        <p className="font-bold text-slate-200">积木库</p>
+        <p className="font-bold text-slate-200"><RubyText>积木库</RubyText></p>
         {blocks.map((block) => (
           <button
             key={block}
@@ -60,12 +61,12 @@ export function BlocksChallenge({ onSuccess }: { onSuccess: () => void }) {
             }}
             className="block w-full cursor-grab rounded-2xl bg-fuchsia-300 px-4 py-3 text-left font-black text-slate-950 active:cursor-grabbing"
           >
-            {block}
+            <RubyText>{block}</RubyText>
           </button>
         ))}
       </div>
       <div className="rounded-3xl bg-slate-950/60 p-5" onDragOver={(event) => event.preventDefault()} onDrop={handleProgramDrop}>
-        <p className="font-bold text-slate-200">程序区</p>
+        <p className="font-bold text-slate-200"><RubyText>程序区</RubyText></p>
         <div className="mt-4 min-h-40 space-y-2">
           {program.map((block, index) => (
             <div
@@ -88,15 +89,15 @@ export function BlocksChallenge({ onSuccess }: { onSuccess: () => void }) {
               }}
               className="cursor-grab rounded-2xl bg-white/10 px-4 py-3 active:cursor-grabbing"
             >
-              {index + 1}. {block}
+              {index + 1}. <RubyText>{block}</RubyText>
             </div>
           ))}
         </div>
         <div className="mt-5 flex gap-3">
-          <button onClick={run} className="rounded-2xl bg-white px-5 py-3 font-bold text-slate-950">运行</button>
-          <button onClick={() => { setProgram([]); setMessage("把积木拖到程序区，也可以点击添加。"); }} className="rounded-2xl bg-white/10 px-5 py-3 font-bold">清空</button>
+          <button onClick={run} className="rounded-2xl bg-white px-5 py-3 font-bold text-slate-950"><RubyText>运行</RubyText></button>
+          <button onClick={() => { setProgram([]); setMessage("把积木拖到程序区，也可以点击添加。"); }} className="rounded-2xl bg-white/10 px-5 py-3 font-bold"><RubyText>清空</RubyText></button>
         </div>
-        <p className="mt-4 text-slate-300">{message}</p>
+        <p className="mt-4 text-slate-300"><RubyText>{message}</RubyText></p>
       </div>
     </div>
   );

@@ -1,6 +1,7 @@
 "use client";
 
 import { CheckCircle2, Circle } from "lucide-react";
+import { RubyText } from "@/components/RubyText";
 import { useProgressStore } from "@/store/progress-store";
 import type { Stage } from "@/lib/courses";
 
@@ -19,7 +20,7 @@ export function CourseProgressBadge({ stage, courseId, mode = "badge" }: Props) 
   return (
     <span className={`inline-flex items-center gap-2 rounded-full px-3 py-1.5 text-sm ${isDone ? "bg-emerald-400/15 text-emerald-200" : "bg-white/10 text-slate-300"}`}>
       {isDone ? <CheckCircle2 size={15} /> : <Circle size={15} />}
-      {isDone ? "已完成" : "未完成"}
+      <RubyText>{isDone ? "已完成" : "未完成"}</RubyText>
     </span>
   );
 }
