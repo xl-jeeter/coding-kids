@@ -1,3 +1,5 @@
+"use client";
+
 import { pinyin } from "pinyin-pro";
 
 const hanPattern = /\p{Script=Han}/u;
