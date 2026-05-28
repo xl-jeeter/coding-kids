@@ -10,17 +10,25 @@ export function PythonEditor({ onSuccess }: { onSuccess: () => void }) {
     const lines = code.split("\n");
     const env: Record<string, string> = {};
     const result: string[] = [];
-    for (const line of lines) {
-      const assign = line.match(/^(\w+)\s*=\s*"?([^"\n]+)"?$/);
+    const errors: string[] = [];
+    lines.forEach((rawLine, index) => {
+      const line = rawLine.trim();
+      if (!line || line.startsWith("#")) return;
+      const assign = line.match(/^(\w+)\s*=\s*(?:"([^"]*)"|'([^']*)'|([^#\n]+))$/);
       const print = line.match(/^print\((.*)\)$/);
-      if (assign) env[assign[1]] = assign[2];
-      if (print) {
-        const parts = print[1].split(",").map((part) => part.trim().replace(/^"|"$/g, ""));
-        result.push(parts.map((part) => env[part] ?? part).join(" "));
+      if (assign) {
+        env[assign[1]] = (assign[2] ?? assign[3] ?? assign[4]).trim();
+        return;
       }
-    }
-    setOutput(result.join("\n") || "没有可输出的内容，请试试 print(...)");
-    if (code.includes("print") && result.length > 0) onSuccess();
+      if (print) {
+        const parts = print[1].split(",").map((part) => part.trim().replace(/^(["'])(.*)\1$/, "$2"));
+        result.push(parts.map((part) => env[part] ?? part).join(" "));
+        return;
+      }
+      errors.push(`第 ${index + 1} 行暂不支持：${line}`);
+    });
+    setOutput(errors.length > 0 ? errors.join("\n") : result.join("\n") || "没有可输出的内容，请试试 print(...)");
+    if (errors.length === 0 && result.length > 0) onSuccess();
   };
 
   return (

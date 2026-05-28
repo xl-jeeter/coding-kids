@@ -4,8 +4,19 @@ import { useState } from "react";
 
 export function MazeChallenge({ onSuccess }: { onSuccess: () => void }) {
   const [path, setPath] = useState<string[]>([]);
+  const [message, setMessage] = useState("提示：先向右走到边，再向下。");
   const target = ["右", "右", "下", "下"];
   const ok = path.length === target.length && path.every((step, index) => step === target[index]);
+
+  const addStep = (step: string) => {
+    setPath((current) => [...current, step]);
+    setMessage("路径已更新，完成后点击检查路径。");
+  };
+
+  const check = () => {
+    setMessage(ok ? "路径正确，收集到宝石！" : "还没到达宝石，提示：右、右、下、下。");
+    if (ok) onSuccess();
+  };
 
   return (
     <div className="space-y-5">
@@ -13,14 +24,14 @@ export function MazeChallenge({ onSuccess }: { onSuccess: () => void }) {
         {Array.from({ length: 9 }).map((_, index) => <div key={index} className="rounded-2xl bg-white/5 p-5">{index === 0 ? "🐰" : index === 8 ? "💎" : "·"}</div>)}
       </div>
       <div className="flex flex-wrap gap-3">
-        {["上", "下", "左", "右"].map((step) => <button key={step} onClick={() => setPath([...path, step])} className="rounded-2xl bg-emerald-300 px-5 py-3 font-black text-slate-950">{step}</button>)}
+        {["上", "下", "左", "右"].map((step) => <button key={step} onClick={() => addStep(step)} className="rounded-2xl bg-emerald-300 px-5 py-3 font-black text-slate-950">{step}</button>)}
       </div>
       <p className="rounded-2xl bg-white/10 p-4 text-slate-200">路径：{path.join(" → ") || "还没有指令"}</p>
       <div className="flex gap-3">
-        <button onClick={() => ok && onSuccess()} className="rounded-2xl bg-white px-5 py-3 font-bold text-slate-950">检查路径</button>
-        <button onClick={() => setPath([])} className="rounded-2xl bg-white/10 px-5 py-3 font-bold">重来</button>
+        <button onClick={check} className="rounded-2xl bg-white px-5 py-3 font-bold text-slate-950">检查路径</button>
+        <button onClick={() => { setPath([]); setMessage("提示：先向右走到边，再向下。"); }} className="rounded-2xl bg-white/10 px-5 py-3 font-bold">重来</button>
       </div>
-      <p className={ok ? "text-emerald-200" : "text-slate-300"}>{ok ? "路径正确，收集到宝石！" : "提示：先向右走到边，再向下。"}</p>
+      <p className={ok ? "text-emerald-200" : "text-slate-300"}>{message}</p>
     </div>
   );
 }

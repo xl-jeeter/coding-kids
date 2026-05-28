@@ -5,7 +5,13 @@ import { useState } from "react";
 export function ConditionChallenge({ onSuccess }: { onSuccess: () => void }) {
   const [condition, setCondition] = useState("下雨");
   const [action, setAction] = useState("带雨伞");
+  const [message, setMessage] = useState("规则正确：如果下雨，就带雨伞。");
   const ok = condition === "下雨" && action === "带雨伞";
+
+  const check = () => {
+    setMessage(ok ? "规则正确：如果下雨，就带雨伞。" : "想想天气和动作是否匹配。");
+    if (ok) onSuccess();
+  };
 
   return (
     <div className="space-y-5">
@@ -15,22 +21,22 @@ export function ConditionChallenge({ onSuccess }: { onSuccess: () => void }) {
       </div>
       <div className="grid gap-3 sm:grid-cols-2">
         <label className="space-y-2 text-sm font-bold text-slate-300">如果
-          <select value={condition} onChange={(e) => setCondition(e.target.value)} className="w-full rounded-2xl bg-white/10 p-3 text-white">
+            <select value={condition} onChange={(e) => { setCondition(e.target.value); setMessage("选择已更新，点击检查规则。"); }} className="w-full rounded-2xl bg-white/10 p-3 text-white">
             <option className="text-slate-950">下雨</option>
             <option className="text-slate-950">天黑</option>
             <option className="text-slate-950">饿了</option>
           </select>
         </label>
         <label className="space-y-2 text-sm font-bold text-slate-300">就
-          <select value={action} onChange={(e) => setAction(e.target.value)} className="w-full rounded-2xl bg-white/10 p-3 text-white">
+            <select value={action} onChange={(e) => { setAction(e.target.value); setMessage("选择已更新，点击检查规则。"); }} className="w-full rounded-2xl bg-white/10 p-3 text-white">
             <option className="text-slate-950">打开台灯</option>
             <option className="text-slate-950">带雨伞</option>
             <option className="text-slate-950">吃点心</option>
           </select>
         </label>
       </div>
-      <button onClick={() => ok && onSuccess()} className="rounded-2xl bg-white px-5 py-3 font-bold text-slate-950">检查规则</button>
-      <p className={ok ? "text-emerald-200" : "text-slate-300"}>{ok ? "规则正确：如果下雨，就带雨伞。" : "想想天气和动作是否匹配。"}</p>
+      <button onClick={check} className="rounded-2xl bg-white px-5 py-3 font-bold text-slate-950">检查规则</button>
+      <p className={ok ? "text-emerald-200" : "text-slate-300"}>{message}</p>
     </div>
   );
 }
