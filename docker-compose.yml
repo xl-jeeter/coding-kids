@@ -1,0 +1,7 @@
+services:
+  coding-kids:
+    build: .
+    container_name: coding-kids
+    ports:
+      - "8889:3000"
+    restart: unless-stopped
